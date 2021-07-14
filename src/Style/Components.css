@@ -1,0 +1,66 @@
+.dropdown.basic-dropdown
+{
+    position: relative;
+    margin: 2vw calc(10px + 0.5vw);
+}
+
+.dropdown.basic-dropdown>button
+{
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 12px;
+}
+
+.dropdown.basic-dropdown>button>i
+{
+    display: inline-block;
+    font-size: 10px;
+    color: #aaa;
+    line-height: 100%;
+    margin-left: 5px;
+    transition: transform 0.5s;
+}
+
+.dropdown.basic-dropdown>.options
+{
+    min-width: 100%;
+    position: absolute;
+    z-index: 100;
+    left: 0px;
+    display: none;
+    font-size: 15px;
+    cursor: pointer;
+    z-index: 10;
+    padding-top: 10px;
+}
+
+.dropdown.basic-dropdown>.options>*
+{
+    display: block;
+    color: black;
+    text-decoration: none;
+    padding: 10px;
+    background-color: #bbb;
+}
+
+.dropdown.basic-dropdown>.options>*:hover
+{
+    background-color: #888;
+    color: white;
+}
+
+
+.dropdown.basic-dropdown>button:focus~.options,
+.dropdown.basic-dropdown:hover>.options,
+.dropdown.basic-dropdown>.options:hover
+{
+    display: block;
+}
+
+.dropdown.basic-dropdown>button:focus>i,
+.dropdown.basic-dropdown:hover>button>i
+{
+    transform: rotateX(180deg);
+}

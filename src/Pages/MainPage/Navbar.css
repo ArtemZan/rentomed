@@ -1,5 +1,236 @@
-.navbar.main-page-navbar
-{
+.navbar.main-page-navbar {
     background-color: white;
-    height: 100px;
+    height: 120px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    z-index: 200;
+}
+
+.main-page-navbar .section
+{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.main-page-navbar .section>.subsection
+{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+
+.main-page-navbar .section>* {
+    display: inline-block;
+}
+
+.navbar.main-page-navbar img {
+    object-fit: contain;
+    height: 80%;
+    margin-left: 30px;
+}
+
+.main-page-navbar .pages {
+    height: 100%;
+    cursor: pointer;
+}
+
+.main-page-navbar .pages>div {
+    box-sizing: border-box;
+    display: inline-block;
+    height: 100%;
+    margin: 0;
+    padding: 0 10px;
+    line-height: 117px;
+    font-weight: bolder;
+    color: #666
+}
+
+.navbar.main-page-navbar .pages>.selected {
+    border-bottom: #2222dd 3px solid;
+    color: #2222dd;
+}
+
+.navbar.main-page-navbar .city-and-search {
+    border: #aaa 1px solid;
+    border-radius: 5px;
+    height: calc(30px + 1vw);
+    padding: 0 5px;
+    margin-left: 20px;
+}
+
+.navbar.main-page-navbar .city-and-search .separator {
+    display: inline-block;
+    height: calc(15px + 0.5vw);
+    width: 1.5px;
+    margin: 0px 0 calc(-0.4vw) 5px; /* dumb solution */
+    background-color: #aaa;
+}
+
+.navbar.main-page-navbar .dropdown {
+    display: inline-block;
+    cursor: default;
+    height: 100%;
+}
+
+.navbar.main-page-navbar .dropdown>.selected {
+    display: inline-block;
+    color: #aaa;
+    height: 100%;
+    line-height: calc(30px + 1vw);
+}
+
+.navbar.main-page-navbar .dropdown>i {
+    float: right;
+    line-height: calc(30px + 1vw);
+    transform: scaleX(0.7);
+    color: #aaa;
+    margin-left: 10px;
+}
+
+
+.navbar.main-page-navbar .search {
+    display: inline-flex;
+}
+
+.navbar.main-page-navbar .search>i {
+    line-height: 30px;
+    color: #aaa;
+    margin-left: 10px;
+}
+
+.navbar.main-page-navbar .search>input {
+    border: none;
+    outline: none;
+    display: inline-block;
+    padding: 0;
+    margin-left: 10px;
+    line-height: 100%;
+}
+
+.navbar.main-page-navbar .search>input::placeholder {
+    font-size: calc(9px + 0.1vw);
+}
+
+.navbar.main-page-navbar>i {
+    cursor: pointer;
+}
+
+.navbar.main-page-navbar .add-to-cart {
+    margin: 0 10px;
+}
+
+.navbar.main-page-navbar .login-button, 
+.navbar.main-page-navbar .signup-button {
+    border-radius: 5px;
+    padding: 2px 10px 4px 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.navbar.main-page-navbar .login-button {
+    background-color: #222290;
+    color: white;
+    margin: 0 10px;
+}
+
+.navbar.main-page-navbar .login-button:hover {
+    background-color: #3333aa;
+}
+
+.navbar.main-page-navbar .signup-button:hover {
+    background-color: #ccf;
+}
+
+@media screen and (max-width: 1050px) {
+    .main-page-navbar .section
+    {
+        flex-flow: wrap-reverse;
+    }
+
+    .main-page-navbar .city-and-search
+    {
+        justify-self: flex-start;
+    }
+
+    .main-page-navbar .pages
+    {
+        display: flex;
+        flex-wrap: nowrap;
+        height: 60px;
+        margin-right: 500px;
+    }
+    
+    .main-page-navbar .pages>div
+    {
+        line-height: 60px;
+    }
+    
+    .navbar.main-page-navbar img {
+        margin-left: 0;
+        height: 10vw
+    }
+    
+    .navbar.main-page-navbar .city-and-search {
+        margin-left: 0;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .main-page-navbar .section
+    {
+        flex-flow: wrap;
+    }
+
+    .main-page-navbar .pages-dropdown
+    {
+        display: block;
+    }
+
+    .main-page-navbar .pages
+    {
+        display: none;
+    }
+}
+
+
+@media screen and (min-width: 650px) {
+    .main-page-navbar .dropdown.pages-dropdown
+    {
+        display: none;
+    }
+
+    .main-page-navbar .pages
+    {
+        display: flex;
+    }
+}
+
+/* pretty bad thing here */
+@media screen and (max-width: 500px) {
+    .main-page-navbar .subsection
+    {
+        position: relative;
+        left: 60px;
+    }
+
+    .main-page-navbar .pages-dropdown
+    {
+        position: relative;
+        top: 40px;
+        left: -10px;
+    }
+
+    .main-page-navbar .city-and-search
+    {
+        position: relative;
+        left: -100px;
+        margin-right: -100px;
+    }
 }

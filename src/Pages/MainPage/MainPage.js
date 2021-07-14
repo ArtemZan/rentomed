@@ -2,6 +2,7 @@ import React from "react"
 
 import Content from "./Content"
 import Navbar from "./Navbar"
+import Footer from "./Footer"
 
 export default function MainPage()
 {
@@ -9,6 +10,7 @@ export default function MainPage()
         <>
             <Navbar />
             <Content />
+            <Footer />
         </>
     )
 }

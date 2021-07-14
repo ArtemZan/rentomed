@@ -1,7 +1,10 @@
-import './App.css';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
 
 import MainPage from "./Pages/MainPage/MainPage"
+
+import "./Style/Content.css"
+import "./Style/Footer.css"
+import "./Style/Navbar.css"
 
 function App() {
   return (
