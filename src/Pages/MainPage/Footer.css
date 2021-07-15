@@ -15,28 +15,36 @@
     margin-bottom: 30px;
 }
 
+.footer.main-page-footer .first-row .separator {
+    display: inline-block;
+    width: 2.5px;
+    height: 90%;
+    margin: 5px 4% 5px 1%;
+    background-color: #999999;
+}
+
 .footer.main-page-footer .contact {
     font-size: 12px;
     width: 100%;
     margin-right: 5%;
 }
 
-.footer.main-page-footer .social {
+.main-page-footer .social {
     min-width: 180px;
 }
 
-.footer.main-page-footer .social a {
+.main-page-footer .social a {
     display: inline-block;
     width: 30px;
     height: 30px;
     margin: 5px;
 }
 
-.footer.main-page-footer .social p {
+.main-page-footer .social p {
     font-size: 12px;
 }
 
-.footer.main-page-footer .social a i {
+.main-page-footer .social a i {
     color: white;
     background-color: #3333aa;
     border-radius: 5px;
@@ -47,32 +55,29 @@
     height: 100%;
 }
 
-.footer.main-page-footer .social a:first-of-type {
+.main-page-footer .social a:first-of-type {
     margin-left: 0;
 }
 
-.footer.main-page-footer .second-row {
+.main-page-footer .second-row {
     border-top: #999999 1px solid;
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     margin-top: 40px;
     padding-top: 30px;
 }
 
+
 .footer.main-page-footer .second-row>div:nth-child(2) {
-    margin: 0 calc(20px + 10vw)
+    margin: 20px;
+    margin-top: 0;
 }
 
 .footer.main-page-footer .second-row p {
     font-size: 12px;
 }
 
-.footer.main-page-footer .first-row .separator {
-    display: inline-block;
-    width: 2.5px;
-    height: 90%;
-    margin: 5px 4% 5px 1%;
-    background-color: #999999;
-}
 
 .footer-title {
     margin: 0;
@@ -85,6 +90,10 @@
     .main-page-footer .first-row {
         flex-direction: row;
     }
+    .main-page-footer .second-row {
+        flex-direction: row;
+    }
+
 
     .footer.main-page-footer .contact {
         width: 50%;

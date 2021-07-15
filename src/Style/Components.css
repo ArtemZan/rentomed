@@ -9,16 +9,18 @@
     cursor: pointer;
     border: none;
     outline: none;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
     background-color: transparent;
     font-size: 12px;
 }
 
 .dropdown.basic-dropdown>button>i
 {
-    display: inline-block;
     font-size: 10px;
     color: #aaa;
-    line-height: 100%;
     margin-left: 5px;
     transition: transform 0.5s;
 }
