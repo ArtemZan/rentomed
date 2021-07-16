@@ -1,0 +1,27 @@
+.main-page-header img
+{
+    object-fit: contain;
+    height: 100%;
+}
+
+.main-page-header
+{
+    position: fixed;
+    top: 0;
+    height: 50vw;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20vw;
+    margin-bottom: -20vw;
+    transition: margin-bottom 0.5s;
+    z-index: -1;
+}
+
+@media screen and (min-width: 600px) {
+    .main-page-header
+    {
+        margin-top: 120px;
+        margin-bottom: -120px;
+    }
+}

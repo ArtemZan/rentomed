@@ -1,7 +1,8 @@
 .content.main-page-content {
-    background-color: #f0f5ff;
+    background-color: var(--pure-white);
     width: 100%;
-    margin-top: 120px;
+    margin-top: 70vw;
+    padding-top: 30px;
 }
 
 .main-page-content .products-navbar {
@@ -35,7 +36,7 @@
 .products-navbar>.dropdown>button>i {
     display: inline-block;
     font-size: 10px;
-    color: #aaa;
+    color: var(--light-grey);
     line-height: 100%;
     margin-left: 5px;
     transition: transform 0.5s;
@@ -56,66 +57,68 @@
     color: black;
     text-decoration: none;
     padding: 10px;
-    background-color: #bbb;
-}
-
-.products-navbar>.dropdown>.options>*:hover {
-    background-color: #888;
-    color: white;
-}
-
-.products-navbar>.dropdown>button:focus~.options, .products-navbar>.dropdown:hover>.options, .products-navbar>.dropdown>.options:hover {
-    display: block;
-}
-
-.products-navbar>.dropdown>button:focus>i, .products-navbar>.dropdown:hover>button>i {
-    transform: rotateX(180deg);
+    background-color: var(--light-grey);
 }
 
 .main-page-content .proposals-container {
     width: 95%;
     margin: auto;
-    height: calc(700px - 15vw);
+    height: auto;
     z-index: 1;
+    position: relative;
 }
 
 .main-page-content .proposals-wrapper {
-    overflow: hidden;
+    position: relative;
+    overflow-x:auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
     background-color: transparent;
     border-radius: 5px;
     width: 100%;
-    height: calc(100% - 50px);
+    height: auto;
     display: block;
+}
+
+.main-page-content .proposals-wrapper::-webkit-scrollbar
+{
+    /* display: none; */
 }
 
 .main-page-content .proposals {
     transition: left 0.5s;
-    height: 100%;
+    height: auto;
     position: relative;
     width: 90vw;
     display: flex;
 }
 
 .main-page-content .proposals>div {
-    background-color: #e5e5ff;
-    height: 100%;
+    scroll-snap-align: start;
+    background-color: var(--light-blue);
+    height: auto;
     box-sizing: border-box;
     min-width: 95vw;
     display: block;
-    padding: 0px calc(2vw + 40px);
+    padding: 10px calc(2vw + 40px);
     overflow: hidden;
     z-index: 10;
 }
 
+.main-page-content .proposals>div strong
+{
+    color: var(--brand)
+}
+
 .main-page-content .proposals .know-more {
-    background-color: #12d;
+    background-color: var(--primary);
     border-radius: 5px;
     padding: 5px 10px;
     color: white;
 }
 
 .main-page-content .proposals .know-more:hover {
-    background-color: #12f;
+    background-color: var(--primary);
     cursor: pointer;
 }
 
@@ -131,12 +134,12 @@
     width: 100%;
     display: flex;
     top: calc(50% - 25px);
-    position: relative;
+    position: absolute;
     align-items: center;
     z-index: 100;
 }
 
-.proposals-container i, .scrolling-bar i {
+.proposals-container i {
     display: block;
     background-color: white;
     width: 50px;
@@ -150,7 +153,7 @@
 }
 
 .arrows i:hover {
-    background-color: #333355;
+    background-color: var(--optional);
     color: white;
 }
 
@@ -170,16 +173,16 @@
     border-radius: 50%;
     width: 9px;
     height: 9px;
-    background-color: #bbb;
+    background-color: var(--light-grey);
     margin: 0px 5px;
 }
 
 .proposals-container .dots>div.active {
-    background-color: #12f;
+    background-color: var(--primary);
 }
 
 .main-page-content .content-title {
-    background-color: #e5e5ff;
+    background-color: var(--light-blue);
     text-align: center;
     width: 90%;
     margin: 0 auto;
@@ -191,136 +194,9 @@
     margin-left: 100px;
 }
 
-.scrolling-bar {
-    flex: 0;
-    box-sizing: border-box;
-    width: 90%;
-    margin: 20px auto;
-    padding: 0;
-    height: 230px;
-    border: 1px solid #0002;
-    background-color: white;
-    overflow: none;
-}
-
-.scrolling-bar .cards-wrapper {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-.scrolling-bar .cards {
-    display: flex;
-    width: 100%;
-    height: 228px;
-    background-color: white;
-    transition: margin-left 0.5s;
-}
-
-.scrolling-bar .cards-wrapper, .scrolling-bar, .scrolling-bar .cards {
-    border-radius: 10px;
-}
-
-.scrolling-bar.scrolling-bar-separated {
-    background-color: transparent;
-    border: none;
-    padding: 0;
-}
-
-.scrolling-bar.scrolling-bar-separated .cards {
-    background-color: transparent;
-}
-
-.scrolling-bar .arrows {
-    position: relative;
-    z-index: 10;
-    height: 0;
-    display: flex;
-    width: calc(90vw + 4px);
-    align-items: center;
-    top: 50%;
-    left: -10px;
-}
-
-.scrolling-bar.scrolling-bar-separated .arrows {
-    width: calc(90vw + 4px);
-    left: calc(-10px);
-}
-
-.scrolling-bar .arrows>i {
-    border-radius: 50%;
-    box-shadow: #cccccc 0px 3px 5px;
-}
-
-.scrolling-bar .arrows i.fa-chevron-right {
-    margin-left: auto;
-}
-
-.scrolling-bar .card {
-    margin: 30px 15px
-}
-
-.scrolling-bar.scrolling-bar-separated .card {
-    background-color: white;
-    border-radius: 10px;
-    height: 190px;
-    padding: 20px;
-    margin: 0 10px 0 0;
-}
-
-.scrolling-bar .card img {
-    width: 130px;
-    height: 130px;
-    mix-blend-mode: multiply;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: -4px;
-}
-
-.scrolling-bar .card .image-wrapper {
-    width: auto;
-    height: auto;
-    border-radius: 5px;
-    padding: 0;
-    margin-top: 10px;
-    background-color: white;
-}
-
-.scrolling-bar.scrolling-bar-separated .card img {
-    width: 150px;
-    height: 150px;
-    object-fit: contain;
-}
-
-.scrolling-bar .card p {
-    text-align: center;
-    padding: 10px;
-    margin: 0;
-}
-
-.scrolling-bar .card.category-card p {
-    text-align: left;
-    font-size: 20px;
-}
-
-.scrolling-bar .card.category-card a {
-    border-radius: 20px;
-    padding: 5px 10px;
-    font-size: 10px;
-    box-shadow: 0 0 10px #aaaaaa;
-    box-shadow: #aaaaaa solid 0 0 10px;
-    background-color: white;
-    cursor: pointer;
-}
-
-.scrolling-bar .card.category-card a:hover {
-    background-color: #0008;
-    color: white
-}
-
 .main-page-content>.know-more {
     box-sizing: border-box;
-    background-color: #ddeeff;
+    background-color: var(--light-blue);
     display: block;
     width: 90%;
     margin: 0 auto;
@@ -339,7 +215,7 @@
 
 .main-page-content>.know-more>p {
     font-size: 10px;
-    background-color: #ffeedd;
+    background-color: var(--light-red);
     display: inline;
     border-radius: 5px;
     padding: 5px 10px;
@@ -355,7 +231,7 @@
     white-space: nowrap;
     margin-left: auto;
     font-size: 17px;
-    background-color: #2222aa;
+    background-color: var(--brand);
     color: white;
     border: none;
     outline: none;
@@ -366,7 +242,7 @@
 }
 
 .main-page-content>.know-more button:hover {
-    background-color: #4444aa;
+    background-color: var(--primary);
 }
 
 @media screen and (min-width: 600px) {
@@ -376,7 +252,12 @@
 }
 
 @media screen and (min-width: 500px) {
-    .main-page-content .proposals {
+    .main-page-content .proposals-container {
         height: calc(550px - 15vw);
     }
+    
+        .content.main-page-content
+        {
+            margin-top: 120px;
+        }
 }

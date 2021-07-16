@@ -38,6 +38,12 @@
     padding-top: 10px;
 }
 
+.dropdown.basic-dropdown>.options.right
+{
+    right: 0;
+    left: auto;
+}
+
 .dropdown.basic-dropdown>.options>*
 {
     display: block;
@@ -45,6 +51,9 @@
     text-decoration: none;
     padding: 10px;
     background-color: #bbb;
+
+    display: flex;
+    justify-content: center;
 }
 
 .dropdown.basic-dropdown>.options>*:hover
@@ -61,8 +70,160 @@
     display: block;
 }
 
-.dropdown.basic-dropdown>button:focus>i,
-.dropdown.basic-dropdown:hover>button>i
+.dropdown.basic-dropdown>button:focus>i.dropdown-arrow-down,
+.dropdown.basic-dropdown:hover>button>i.dropdown-arrow-down
 {
     transform: rotateX(180deg);
+}
+
+
+/* HORIZONTAL SCROLL BAR*/
+
+.scrolling-bar {
+    position: relative;
+    flex: 0;
+    box-sizing: border-box;
+    width: 90%;
+    margin: 20px auto;
+    padding: 0;
+    height: 230px;
+    border: 1px solid #0002;
+    background-color: white;
+    overflow: none;
+}
+
+.scrolling-bar i {
+    display: block;
+    background-color: white;
+    width: 50px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 20px;
+    text-align: center;
+    line-height: 40px;
+    color: #aaaaaa;
+    transform: scaleX(0.8);
+}
+
+
+.scrolling-bar .cards-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.scrolling-bar .cards {
+    display: flex;
+    width: 100%;
+    height: 228px;
+    background-color: white;
+    position: relative;
+    transition: left 0.5s;
+}
+
+.scrolling-bar .card:last-child
+{
+    padding-right: 30px;
+}
+
+.scrolling-bar .cards-wrapper, .scrolling-bar, .scrolling-bar .cards {
+    border-radius: 10px;
+}
+
+.scrolling-bar.scrolling-bar-separated {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+.scrolling-bar.scrolling-bar-separated .cards {
+    background-color: transparent;
+}
+
+.scrolling-bar .arrows {
+    position: absolute;
+    z-index: 10;
+    height: 0;
+    display: flex;
+    width: calc(90vw + 4px);
+    align-items: center;
+    top: 50%;
+    left: -10px;
+}
+
+.scrolling-bar.scrolling-bar-separated .arrows {
+    width: calc(90vw + 4px);
+    left: calc(-10px);
+}
+
+.scrolling-bar .arrows>i {
+    border-radius: 50%;
+    box-shadow: #cccccc 0px 3px 5px;
+}
+
+.scrolling-bar .arrows i.fa-chevron-right {
+    margin-left: auto;
+}
+
+.scrolling-bar .card {
+    margin: 30px 15px
+}
+
+.scrolling-bar.scrolling-bar-separated .card {
+    background-color: white;
+    border-radius: 10px;
+    height: 190px;
+    padding: 20px;
+    margin: 0 10px 0 0;
+}
+
+.scrolling-bar .card img {
+    display: block;
+    width: 130px;
+    height: 130px;
+    mix-blend-mode: multiply;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.scrolling-bar .card .image-wrapper {
+    width: auto;
+    height: auto;
+    border-radius: 5px;
+    padding: 0;
+    margin-top: 10px;
+    background-color: white;
+}
+
+.scrolling-bar.scrolling-bar-separated .card img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+}
+
+.scrolling-bar .card p {
+    text-align: center;
+    padding: 10px;
+    margin: 0;
+}
+
+.scrolling-bar .card.category-card p {
+    text-align: left;
+    font-size: 20px;
+}
+
+.scrolling-bar .card.category-card a {
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-size: 10px;
+    box-shadow: 0 0 10px #aaaaaa;
+    box-shadow: #aaaaaa solid 0 0 10px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.scrolling-bar .card.category-card a:hover {
+    background-color: #0008;
+    color: white
 }

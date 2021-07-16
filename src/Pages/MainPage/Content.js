@@ -1,6 +1,6 @@
 import React from "react"
 import "./Content.css"
-import { Dropdown } from "../../Components"
+import { Dropdown, ScrollingBar } from "../../Components"
 
 function ProductsNavbar() {
     return (
@@ -53,6 +53,8 @@ class Proposals extends React.Component {
     constructor(props) {
         super(props)
 
+        this.wrapper = React.createRef()
+
         this.state = { cardNumber: 0, windowWidth: window.innerWidth, dots: <></> }
         this.cardsNumber = props.cards.length
         this.updateDots = true
@@ -99,11 +101,19 @@ class Proposals extends React.Component {
         this.GenDots()
     }
 
+    OnScroll() {
+        //console.log(Math.round(this.wrapper.current.scrollLeft / this.state.windowWidth))
+        console.log(this.wrapper.current.scrollLeft / this.wrapper.current.clientWidth, Math.round(this.wrapper.current.scrollLeft / this.wrapper.current.clientWidth))
+        this.setState({ cardNumber: Math.round(this.wrapper.current.scrollLeft / this.wrapper.current.clientWidth) })
+        this.GenDots()
+    }
+
     GenDots(update_now) {
         if (update_now) {
             let dots = []
             for (let i in this.props.cards) {
                 dots.push(<div key={i} className={i == this.state.cardNumber ? "active" : ""} />)
+                console.log(i, this.state.cardNumber)
             }
 
             this.setState({ dots: dots })
@@ -116,9 +126,9 @@ class Proposals extends React.Component {
     }
 
     OnResize() {
+        // Window width can be got from window.innerWidth, however the state needs to be updated)
         this.setState({ windowWidth: window.innerWidth })
     }
-
     render() {
         return (
             <div className="proposals-container">
@@ -128,8 +138,10 @@ class Proposals extends React.Component {
                     {this.state.cardNumber !== this.cardsNumber - 1 ? <i className="fas fa-chevron-right" onClick={this.Next.bind(this)} /> : <></>}
                 </div>
 
-                <div className="proposals-wrapper">
-                    <div className="proposals" style={{ left: -this.state.cardNumber * this.state.windowWidth * 0.95 }}>
+                <div className="proposals-wrapper" ref={this.wrapper} onScroll={this.OnScroll.bind(this)}>
+                    <div className="proposals" style={{
+                        left: -this.state.cardNumber * this.state.windowWidth * 0.95
+                    }}>
                         {this.cards}
                     </div>
                 </div>
@@ -156,7 +168,7 @@ function Card(props, key) {
 
 function CategoryCard(props, key) {
     return (
-        <div className="card category-card" key={key} style={{ backgroundColor: props.background, height: props.height - 40 + "px" }}>
+        <div className="card category-card" key={key} style={{ backgroundColor: props.background, height: props.height }}>
             <p>{props.title}</p>
             <a href={props.link}>View More</a>
             <div className="image-wrapper">
@@ -166,114 +178,22 @@ function CategoryCard(props, key) {
     )
 }
 
-class ScrollingBar extends React.Component {
-    constructor(props) {
-        super(props)
-
-        if (props.cardGenerator) {
-            if (props.props) {
-                this.cards = this.props.cards.map((card, index) => {
-                    let cardProps = Object.assign(props.props, card, { height: (props.height ? props.height : 228) })
-                    return this.props.cardGenerator(cardProps, index)
-                })
-            }
-            else {
-                this.cards = this.props.cards.map((card, index) => this.props.cardGenerator(Object.assign(card, { height: (props.height ? props.height : 228) }), index))
-            }
-        }
-        else {
-            this.cards = []
-        }
-
-
-        this.defaultCardWidth = this.props.separate ? 220 : 180
-        if (props.defaultCardWidth)
-            this.defaultCardWidth = props.defaultCardWidth
-        this.cardsCount = props.cards.length
-        this.offsetLeft = this.props.separate ? 20 : 40
-
-        this.summaryWidth = 0
-        for (let c of this.props.cards) {
-            if (c.width)
-                this.summaryWidth += c.width + 40
-            else
-                this.summaryWidth += this.defaultCardWidth
-        }
-
-        this.state = {
-            offset: 0,
-            margin: 0,
-            touchingLeftBorder: true,
-            touchingRightBorder: false
-        }
-
-        this.state.touchingRightBorder = this.summaryWidth < window.innerWidth * 0.9
-    }
-
-    Left() {
-        let new_offset = this.state.offset
-        new_offset -= 2
-
-        let margin = 0
-        if (this.state.touchingRightBorder) {
-            for (let i = 0; i < new_offset; i++) {
-                margin -= (this.props.cards[i].width ? this.props.cards[i].width : this.defaultCardWidth)
-            }
-        }
-        else {
-            margin = this.state.margin
-            for (let i = this.state.offset; i > new_offset; i--) {
-                margin += (this.props.cards[i].width ? this.props.cards[i].width : this.defaultCardWidth)
-            }
-        }
-
-        if (new_offset <= 0) {
-            new_offset = 0
-            margin = 0
-            this.setState({ touchingLeftBorder: true })
-        }
-
-        this.setState({ offset: new_offset, touchingRightBorder: false, margin: margin })
-    }
-
-    Right() {
-        let new_offset = this.state.offset
-        new_offset += 2
-
-        let margin = this.state.margin
-        for (let i = this.state.offset; i < new_offset; i++) {
-            margin -= (this.props.cards[i].width ? this.props.cards[i].width + 40 : this.defaultCardWidth)
-        }
-
-        if (window.innerWidth * 0.9 - margin > this.summaryWidth) {
-            margin = window.innerWidth * 0.9 - this.summaryWidth - this.offsetLeft
-            this.setState({ touchingRightBorder: true })
-        }
-
-        this.setState({ offset: new_offset, touchingLeftBorder: false, margin: margin })
-    }
-
-    componentDidMount() {
-    }
-
-    render() {
-
-        return (
-            <div style={{ height: (this.props.height ? this.props.height : "") }} className={"scrolling-bar" + (this.props.separate ? " scrolling-bar-separated" : "")}>
-                <div className="arrows">
-                    {this.state.touchingLeftBorder ? <></> : <i className="fas fa-chevron-left" onClick={this.Left.bind(this)}></i>}
-                    {this.state.touchingRightBorder ? <></> : <i className="fas fa-chevron-right" onClick={this.Right.bind(this)}></i>}
-                </div>
-                <div className="cards-wrapper">
-                    <div className={"cards" + (this.props.separate ? " cards-separated" : "")}
-                        style={{ marginLeft: this.state.margin, height: (this.props.height ? this.props.height : "") }}>
-                        {this.cards}
-                    </div>
-                </div>
-            </div>
-        )
-    }
+function ProposalCard(props, key) {
+    return (
+        <div key={key}>
+            <img src={props.img} />
+            <h3 className="highlight">{props.highlight}</h3>
+            <h1 className="title">{props.title}</h1>
+            <p className="addition">{props.addition}</p>
+            <p className="tags">{props.tags}</p>
+            <a className="know-more">
+                Know More
+            </a>
+        </div>
+    )
 }
+
+
 
 
 function Content() {
@@ -296,6 +216,25 @@ function Content() {
                     tags: "Practology I Spieder Veins I Dental I Cosmo Gynocology I General Surgery I Varicose Veins I Liposuction I ENT I Physio Therapy and Many More"
                 }
             ]} />
+
+            {/* <ScrollingBar cards={
+                [
+                    {
+                        img: "Images/img219.jpg",
+                        highlight: "Crack today's deal for hospital equipments",
+                        title: "Laser Machine",
+                        addition: <>Available Now <strong>980Nm 1470Nm 1940Nm</strong></>,
+                        tags: "Practology I Spieder Veins I Dental I Cosmo Gynocology I General Surgery I Varicose Veins I Liposuction I ENT I Physio Therapy and Many More"
+                    },
+                    {
+                        img: "Images/img219.jpg",
+                        highlight: "Crack today's deal for hospital equipments",
+                        title: "Laser Machine",
+                        addition: <>Available Now <strong>980Nm 1470Nm 1940Nm</strong></>,
+                        tags: "Practology I Spieder Veins I Dental I Cosmo Gynocology I General Surgery I Varicose Veins I Liposuction I ENT I Physio Therapy and Many More"
+                    }
+                ]} cardGenerator={ProposalCard} /> */}
+
             <h4 className="content-title">
                 Now shop daily essential products for home, hospitals, offices, shopping malls etc
             </h4>
@@ -343,12 +282,12 @@ function Content() {
                 { img: "Products/Rento/1.png", title: "title" },
                 { img: "Products/Rento/3.png", title: "title" },
                 { img: "Products/Rento/4.png", title: "title" },
-            ]} cardGenerator={Card} props={{ background: "#ccccff" }} />
+            ]} cardGenerator={Card} props={{ background: "var(--light-blue)" }} />
 
             <h4 className="content-subtitle">
                 Check out the most popular categories
             </h4>
-            <ScrollingBar height={300} separate background="white" cards={[
+            <ScrollingBar height={"auto"} separate background="white" cards={[
                 { img: "Products/Rento/1.png", title: "title", width: 200, background: "#ccffd0" },
                 { img: "Products/Rento/3.png", title: "title", width: 150, background: "#ccd0ff" },
                 { img: "Products/Rento/4.png", title: "title", width: 220, background: "#ffccd0" },
